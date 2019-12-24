@@ -1,0 +1,354 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Ems_DbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeName" Type="varchar" MaxLength="20" />
+          <Property Name="DateofBirth" Type="date" />
+          <Property Name="Dateofjoin" Type="date" />
+          <Property Name="DepartmentName" Type="varchar" MaxLength="20" />
+          <Property Name="Location" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Expenses">
+          <Key>
+            <PropertyRef Name="ReceiptNo" />
+          </Key>
+          <Property Name="ReceiptNo" Type="int" Nullable="false" />
+          <Property Name="Receiptdate" Type="date" />
+          <Property Name="Receiptamount" Type="int" />
+          <Property Name="EmployeeId" Type="int" />
+          <Property Name="StatusofReceipt" Type="varchar" MaxLength="20" />
+          <Property Name="UploadReceipt" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="StatusofReceipt" />
+          </Key>
+          <Property Name="Statusid" Type="int" />
+          <Property Name="StatusofReceipt" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Supervisor">
+          <Key>
+            <PropertyRef Name="SupervisorId" />
+          </Key>
+          <Property Name="SupervisorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Supervisorname" Type="varchar" MaxLength="20" />
+          <Property Name="Email" Type="varchar" MaxLength="20" />
+          <Property Name="ApproveDate" Type="date" />
+          <Property Name="EmployeeId" Type="int" />
+          <Property Name="ReceiptNo" Type="int" />
+          <Property Name="StatusofReceipt" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <Association Name="FK__Expenses__Employ__5AEE82B9">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Expenses" Type="Self.Expenses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="Expenses">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Expenses__Status__693CA210">
+          <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+          <End Role="Expenses" Type="Self.Expenses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="StatusofReceipt" />
+            </Principal>
+            <Dependent Role="Expenses">
+              <PropertyRef Name="StatusofReceipt" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Superviso__Emplo__73BA3083">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Supervisor" Type="Self.Supervisor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="Supervisor">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Superviso__Recei__74AE54BC">
+          <End Role="Expenses" Type="Self.Expenses" Multiplicity="0..1" />
+          <End Role="Supervisor" Type="Self.Supervisor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Expenses">
+              <PropertyRef Name="ReceiptNo" />
+            </Principal>
+            <Dependent Role="Supervisor">
+              <PropertyRef Name="ReceiptNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Superviso__Statu__75A278F5">
+          <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+          <End Role="Supervisor" Type="Self.Supervisor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="StatusofReceipt" />
+            </Principal>
+            <Dependent Role="Supervisor">
+              <PropertyRef Name="StatusofReceipt" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Ems_DbModelStoreContainer">
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="Assignment" store:Type="Tables" />
+          <EntitySet Name="Expenses" EntityType="Self.Expenses" Schema="Assignment" store:Type="Tables" />
+          <EntitySet Name="Status" EntityType="Self.Status" Schema="Assignment" store:Type="Tables" />
+          <EntitySet Name="Supervisor" EntityType="Self.Supervisor" Schema="Assignment" store:Type="Tables" />
+          <AssociationSet Name="FK__Expenses__Employ__5AEE82B9" Association="Self.FK__Expenses__Employ__5AEE82B9">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Expenses" EntitySet="Expenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Expenses__Status__693CA210" Association="Self.FK__Expenses__Status__693CA210">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Expenses" EntitySet="Expenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Superviso__Emplo__73BA3083" Association="Self.FK__Superviso__Emplo__73BA3083">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Supervisor" EntitySet="Supervisor" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Superviso__Recei__74AE54BC" Association="Self.FK__Superviso__Recei__74AE54BC">
+            <End Role="Expenses" EntitySet="Expenses" />
+            <End Role="Supervisor" EntitySet="Supervisor" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Superviso__Statu__75A278F5" Association="Self.FK__Superviso__Statu__75A278F5">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Supervisor" EntitySet="Supervisor" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Ems_DbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DateofBirth" Type="DateTime" Precision="0" />
+          <Property Name="Dateofjoin" Type="DateTime" Precision="0" />
+          <Property Name="DepartmentName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Expenses" Relationship="Self.FK__Expenses__Employ__5AEE82B9" FromRole="Employee" ToRole="Expenses" />
+          <NavigationProperty Name="Supervisors" Relationship="Self.FK__Superviso__Emplo__73BA3083" FromRole="Employee" ToRole="Supervisor" />
+        </EntityType>
+        <EntityType Name="Expens">
+          <Key>
+            <PropertyRef Name="ReceiptNo" />
+          </Key>
+          <Property Name="ReceiptNo" Type="Int32" Nullable="false" />
+          <Property Name="Receiptdate" Type="DateTime" Precision="0" />
+          <Property Name="Receiptamount" Type="Int32" />
+          <Property Name="EmployeeId" Type="Int32" />
+          <Property Name="StatusofReceipt" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="UploadReceipt" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK__Expenses__Employ__5AEE82B9" FromRole="Expenses" ToRole="Employee" />
+          <NavigationProperty Name="Status" Relationship="Self.FK__Expenses__Status__693CA210" FromRole="Expenses" ToRole="Status" />
+          <NavigationProperty Name="Supervisors" Relationship="Self.FK__Superviso__Recei__74AE54BC" FromRole="Expenses" ToRole="Supervisor" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="StatusofReceipt" />
+          </Key>
+          <Property Name="Statusid" Type="Int32" />
+          <Property Name="StatusofReceipt" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Expenses" Relationship="Self.FK__Expenses__Status__693CA210" FromRole="Status" ToRole="Expenses" />
+          <NavigationProperty Name="Supervisors" Relationship="Self.FK__Superviso__Statu__75A278F5" FromRole="Status" ToRole="Supervisor" />
+        </EntityType>
+        <EntityType Name="Supervisor">
+          <Key>
+            <PropertyRef Name="SupervisorId" />
+          </Key>
+          <Property Name="SupervisorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Supervisorname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ApproveDate" Type="DateTime" Precision="0" />
+          <Property Name="EmployeeId" Type="Int32" />
+          <Property Name="ReceiptNo" Type="Int32" />
+          <Property Name="StatusofReceipt" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK__Superviso__Emplo__73BA3083" FromRole="Supervisor" ToRole="Employee" />
+          <NavigationProperty Name="Expens" Relationship="Self.FK__Superviso__Recei__74AE54BC" FromRole="Supervisor" ToRole="Expenses" />
+          <NavigationProperty Name="Status" Relationship="Self.FK__Superviso__Statu__75A278F5" FromRole="Supervisor" ToRole="Status" />
+        </EntityType>
+        <Association Name="FK__Expenses__Employ__5AEE82B9">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Expenses" Type="Self.Expens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="Expenses">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Superviso__Emplo__73BA3083">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Supervisor" Type="Self.Supervisor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="Supervisor">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Expenses__Status__693CA210">
+          <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+          <End Role="Expenses" Type="Self.Expens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="StatusofReceipt" />
+            </Principal>
+            <Dependent Role="Expenses">
+              <PropertyRef Name="StatusofReceipt" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Superviso__Recei__74AE54BC">
+          <End Role="Expenses" Type="Self.Expens" Multiplicity="0..1" />
+          <End Role="Supervisor" Type="Self.Supervisor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Expenses">
+              <PropertyRef Name="ReceiptNo" />
+            </Principal>
+            <Dependent Role="Supervisor">
+              <PropertyRef Name="ReceiptNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Superviso__Statu__75A278F5">
+          <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+          <End Role="Supervisor" Type="Self.Supervisor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="StatusofReceipt" />
+            </Principal>
+            <Dependent Role="Supervisor">
+              <PropertyRef Name="StatusofReceipt" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Ems_DbEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="Expenses" EntityType="Self.Expens" />
+          <EntitySet Name="Status" EntityType="Self.Status" />
+          <EntitySet Name="Supervisors" EntityType="Self.Supervisor" />
+          <AssociationSet Name="FK__Expenses__Employ__5AEE82B9" Association="Self.FK__Expenses__Employ__5AEE82B9">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Expenses" EntitySet="Expenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Superviso__Emplo__73BA3083" Association="Self.FK__Superviso__Emplo__73BA3083">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Supervisor" EntitySet="Supervisors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Expenses__Status__693CA210" Association="Self.FK__Expenses__Status__693CA210">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Expenses" EntitySet="Expenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Superviso__Recei__74AE54BC" Association="Self.FK__Superviso__Recei__74AE54BC">
+            <End Role="Expenses" EntitySet="Expenses" />
+            <End Role="Supervisor" EntitySet="Supervisors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Superviso__Statu__75A278F5" Association="Self.FK__Superviso__Statu__75A278F5">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Supervisor" EntitySet="Supervisors" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Ems_DbModelStoreContainer" CdmEntityContainer="Ems_DbEntities1">
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="Ems_DbModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="DateofBirth" ColumnName="DateofBirth" />
+                <ScalarProperty Name="Dateofjoin" ColumnName="Dateofjoin" />
+                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Expenses">
+            <EntityTypeMapping TypeName="Ems_DbModel.Expens">
+              <MappingFragment StoreEntitySet="Expenses">
+                <ScalarProperty Name="ReceiptNo" ColumnName="ReceiptNo" />
+                <ScalarProperty Name="Receiptdate" ColumnName="Receiptdate" />
+                <ScalarProperty Name="Receiptamount" ColumnName="Receiptamount" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="StatusofReceipt" ColumnName="StatusofReceipt" />
+                <ScalarProperty Name="UploadReceipt" ColumnName="UploadReceipt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status">
+            <EntityTypeMapping TypeName="Ems_DbModel.Status">
+              <MappingFragment StoreEntitySet="Status">
+                <ScalarProperty Name="Statusid" ColumnName="Statusid" />
+                <ScalarProperty Name="StatusofReceipt" ColumnName="StatusofReceipt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Supervisors">
+            <EntityTypeMapping TypeName="Ems_DbModel.Supervisor">
+              <MappingFragment StoreEntitySet="Supervisor">
+                <ScalarProperty Name="SupervisorId" ColumnName="SupervisorId" />
+                <ScalarProperty Name="Supervisorname" ColumnName="Supervisorname" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ApproveDate" ColumnName="ApproveDate" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="ReceiptNo" ColumnName="ReceiptNo" />
+                <ScalarProperty Name="StatusofReceipt" ColumnName="StatusofReceipt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

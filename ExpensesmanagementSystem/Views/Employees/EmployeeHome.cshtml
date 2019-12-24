@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "EmployeeHome";
+}
+
+<h2> Welcome to EmployeeHomePage</h2>
+
+<ul class="nav navbar-nav">
+    <li>@Html.ActionLink("Profile", "EditEmployee", "Employees", null, new { @class = "active" })</li>
+    <li>@Html.ActionLink("AddReceipts", "AddReceipt", "Employees")</li>
+    <li>@Html.ActionLink("ViewReceipts", "ViewReceipt", "Employees")</li>
+</ul>
+
+

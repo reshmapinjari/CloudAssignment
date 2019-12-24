@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8b82abef3b6642f0add4a782cda3dca2" Name="Diagram1">
+        <EntityTypeShape EntityType="Ems_DbModel.Employee" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Ems_DbModel.Expens" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Ems_DbModel.Status" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Ems_DbModel.Supervisor" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="Ems_DbModel.FK__Expenses__Employ__5AEE82B9" ManuallyRouted="false" />
+        <AssociationConnector Association="Ems_DbModel.FK__Superviso__Emplo__73BA3083" ManuallyRouted="false" />
+        <AssociationConnector Association="Ems_DbModel.FK__Expenses__Status__693CA210" ManuallyRouted="false" />
+        <AssociationConnector Association="Ems_DbModel.FK__Superviso__Recei__74AE54BC" ManuallyRouted="false" />
+        <AssociationConnector Association="Ems_DbModel.FK__Superviso__Statu__75A278F5" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

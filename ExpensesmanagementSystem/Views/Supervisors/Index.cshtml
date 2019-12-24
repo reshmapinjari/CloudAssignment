@@ -1,0 +1,63 @@
+﻿@model IEnumerable<ExpensesmanagementSystem.Models.Supervisor>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Supervisorname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ApproveDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee.EmployeeName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Expens.StatusofReceipt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status.StatusofReceipt)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Supervisorname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ApproveDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee.EmployeeName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Expens.StatusofReceipt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status.StatusofReceipt)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.SupervisorId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.SupervisorId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.SupervisorId })
+        </td>
+    </tr>
+}
+
+</table>

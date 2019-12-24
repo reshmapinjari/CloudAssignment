@@ -1,0 +1,66 @@
+﻿@model ExpensesmanagementSystem.Models.Supervisor
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Supervisor</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Supervisorname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Supervisorname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ApproveDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApproveDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Employee.EmployeeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Employee.EmployeeName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Expens.StatusofReceipt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Expens.StatusofReceipt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status.StatusofReceipt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status.StatusofReceipt)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.SupervisorId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

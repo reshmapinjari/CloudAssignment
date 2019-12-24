@@ -1,0 +1,57 @@
+﻿@model IEnumerable<ExpensesmanagementSystem.Models.Expens>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Receiptdate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Receiptamount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UploadReceipt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee.EmployeeName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status.StatusofReceipt)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Receiptdate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Receiptamount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UploadReceipt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee.EmployeeName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status.StatusofReceipt)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ReceiptNo }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ReceiptNo }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ReceiptNo })
+        </td>
+    </tr>
+}
+
+</table>
